@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 *{
     padding: 0;
@@ -46,6 +47,7 @@
     text-align: center;
     border-radius: 50px;
 }
+
 .header_container , .footer_container{
     background: var(--banner_bg);
     width: 100%;
@@ -60,4 +62,51 @@
 }
 .footer_container p {
     margin-left: 2em;
+}
+.graph{
+    border: 2px solid var(--banner_bg );
+    width: 800px;
+    height: 300px;
+    border-radius: 30px;
+    margin-top: 1em;
+}
+.filtrage .dd{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.filtrage div label{
+    color: var(--text_title);
+    font-size: 20px;
+    margin-bottom: 0.5em;
+}
+.filtrage select{
+    width: 500px;
+    text-align: center;
+    height: 40px;
+    border-radius: 10px;
+    background-color: var(--text_title);
+}
+.filtrage{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.filtrage a{
+    display: flex;
+    text-decoration: none;
+    color: var(--text_home);
+    background-color: var(--text_title);
+    width: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    border-radius:5px ;
+   font-size: 30px;
+}
+.hh{
+    display: flex;
+    flex-direction: row;
 }
