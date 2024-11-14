@@ -1,5 +1,7 @@
 <?php
-
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 require_once('database.php');
 
 // Database connexion.
@@ -20,7 +22,7 @@ if($requestMethod=='GET'){
     if($requestRessource=='one_currency'){
         if (isset( $_GET['id'])){
             $currencyCode = $_GET['id'];
-            $query = "SELECT date_value,value FROM currency WHERE iso = :currencyCode";
+            $query = "SELECT date_value,value FROM currency_to_euro WHERE iso = :currencyCode";
             $stmt = $db->prepare($query);
             $stmt->bindParam(':currencyCode', $currencyCode, PDO::PARAM_STR);
             // Execute the query.

@@ -65,8 +65,8 @@
 }
 .graph{
     border: 2px solid var(--banner_bg );
-    width: 800px;
-    height: 300px;
+    width: fit-content;
+    height: fit-content;
     border-radius: 30px;
     margin-top: 1em;
 }
