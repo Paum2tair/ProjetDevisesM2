@@ -6,15 +6,21 @@ import zoomPlugin from 'chartjs-plugin-zoom';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, TimeScale, zoomPlugin);
 
-const PriceChart: React.FC = () => {
+interface PriceChartProps {
+  currency: string; // Nouvelle prop pour recevoir la devise sélectionnée
+}
+
+const PriceChart: React.FC<PriceChartProps> = ({ currency }) => {
   const [data, setData] = useState<any[]>([]);
   const [filteredData, setFilteredData] = useState<any[]>([]);
-  const chartRef = useRef<any>(null);  // Référence au composant Chart
+  const chartRef = useRef<any>(null);
 
   useEffect(() => {
+    if (!currency) return; // Ne pas exécuter si aucune devise n'est sélectionnée
+
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/requete.php/one_currency?id=USD");
+        const response = await fetch(`http://localhost:8000/requete.php/one_currency?id=${currency}`);
         const result = await response.json();
 
         const transformedData = result.map((item: any) => ({
@@ -32,38 +38,26 @@ const PriceChart: React.FC = () => {
     fetchData();
 
     return () => {
-      // Nettoyage du graphique
       if (chartRef.current) {
         const chartInstance = chartRef.current.chartInstance;
         if (chartInstance) {
-          chartInstance.destroy();  // Détruire l'instance du graphique
+          chartInstance.destroy();
         }
       }
     };
-  }, []);
+  }, [currency]); // Dépendance pour recharger les données quand la devise change
 
   const labels = filteredData.map((entry) => entry.date_value);
   const values = filteredData.map((entry) => entry.value);
-
-  const formatDate = (date: Date) => {
-    const options: Intl.DateTimeFormatOptions = {
-      hour: '2-digit',
-      minute: '2-digit',
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    };
-    return date.toLocaleString('fr-FR', options);
-  };
 
   const chartData = {
     labels: labels,
     datasets: [
       {
-        label: 'Évolution du prix',
+        label: `Évolution de la valeur de (${currency})`,
         data: values,
-        borderColor: 'rgba(75,192,192,1)',
-        backgroundColor: 'rgba(75,192,192,0.2)',
+        borderColor: '#B03052',
+        backgroundColor: '#D76C82',
         fill: true,
         tension: 0.4,
       },
@@ -75,25 +69,39 @@ const PriceChart: React.FC = () => {
     plugins: {
       title: {
         display: true,
-        text: 'Évolution du prix en fonction du temps',
+        text: 'Évolution du taux de change en euro en fonction du temps',
+        color: '#D9D9D9',
+      },
+      legend: {
+        labels: {
+          color: '#D9D9D9',
+        },
+      },
+      tooltip: {
+        enabled: true,
+        callbacks: {
+          label: (context: any) => `Valeur: ${context.raw}`,
+        },
+        titleColor: '#D9D9D9',
+        bodyColor: '#D9D9D9',
       },
     },
     scales: {
       x: {
         type: 'time',
         time: {
-          unit: 'minute',
-          tooltipFormat: 'll HH:mm',
+          unit: 'day',
           displayFormats: {
-            minute: 'HH:mm',
-            hour: 'HH:mm',
+            day: 'dd/MM/yyyy',
           },
         },
         title: {
           display: true,
           text: 'Temps',
+          color: '#D9D9D9',
         },
         ticks: {
+          color: '#D9D9D9',
           autoSkip: true,
           maxRotation: 45,
         },
@@ -102,7 +110,11 @@ const PriceChart: React.FC = () => {
         beginAtZero: false,
         title: {
           display: true,
-          text: 'Prix',
+          text: `valeur d'un ${currency} en EUR`,
+          color: '#D9D9D9',
+        },
+        ticks: {
+          color: '#D9D9D9',
         },
       },
     },
@@ -113,14 +125,6 @@ const PriceChart: React.FC = () => {
     zoom: {
       enabled: true,
       mode: 'xy',
-      rangeMin: {
-        x: 0,
-        y: 0,
-      },
-      rangeMax: {
-        x: 100,
-        y: 100,
-      },
     },
   };
 
@@ -130,8 +134,8 @@ const PriceChart: React.FC = () => {
         data={chartData} 
         options={chartOptions}
         width={1200}
-        height={600}
-        ref={chartRef} // Attache la référence à ce composant
+        height={300}
+        ref={chartRef}
       />
     </div>
   );

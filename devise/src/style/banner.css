@@ -69,6 +69,13 @@
     height: fit-content;
     border-radius: 30px;
     margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+.graph p {
+    padding: 1em;
+    color: var(--text_title);
+    font-weight: 300;
 }
 .filtrage .dd{
     display: flex;
