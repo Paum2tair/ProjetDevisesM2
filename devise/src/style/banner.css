@@ -35,18 +35,7 @@
     text-align: center;
 }
 
-.home_bt {
-    display: block;
-    text-decoration: none;
-    background: var(--text_title);
-    color: var(--text_home);
-    margin-top: 3em;
-    font-size: 30px;
-    padding: 1em;
-    width: 500px;
-    text-align: center;
-    border-radius: 50px;
-}
+
 
 .header_container , .footer_container{
     background: var(--banner_bg);
@@ -70,6 +59,7 @@
     border-radius: 30px;
     margin-top: 1em;
     margin-bottom: 2em;
+    background: #d9d9d91e;
 }
 
 .graph p {
@@ -132,6 +122,7 @@
 
 .form{
     border: 2px solid var(--banner_bg);
+    background: #d9d9d91e;
     border-radius: 30px;
     padding: 2em;
     display: flex;
@@ -158,4 +149,77 @@
     padding: 10px;
     border-radius: 30px;
     font-size: 30px;
+}
+
+/**************************************/
+
+.home_bt {
+    display: block;
+    text-decoration: none;
+    background: var(--text_title);
+    color: var(--text_home);
+    margin-top: 3em;
+    font-size: 30px;
+    padding: 1em;
+    width: 500px;
+    text-align: center;
+    border-radius: 50px;
+    position: relative;
+    box-shadow: 6px 6px 0 var(--text_home);
+    transition: all 0.3s ease-in-out; /* Pour des transitions douces */
+}
+
+.text {
+    color: var(--text_home);
+    font-weight: 700;
+    font-size: 50px;
+    position: absolute;
+    left: 130px;
+    top:0;
+}
+
+.fleche {
+    position: absolute;
+    right: 20px;
+    color: var(--text_home);
+    font-weight: 500;
+    font-size: 80px;
+    top:-18px;
+    transition: right 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.home_bt:hover {
+    width: 600px;
+    box-shadow: 10px 10px 0 var(--text_home);
+}
+
+.home_bt:hover .fleche {
+    right: 110px;
+}
+
+.home_bt:hover .zero {
+    animation: color_anime 1s infinite 0.2s;
+}
+
+.home_bt:hover .un {
+    right: 60px;
+    animation: color_anime 1s infinite 0.4s;
+}
+
+.home_bt:hover .deux {
+    right: 10px;
+    animation: color_anime 1s infinite 0.6s;
+}
+
+/* Animations pour les couleurs */
+@keyframes color_anime {
+    from {
+        color: #3D0301;
+    }
+    50% {
+        color: #B03052;
+    }
+    to {
+        color: #D76C82;
+    }
 }
