@@ -117,3 +117,45 @@
     display: flex;
     flex-direction: row;
 }
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 1em;
+}
+
+.success {
+    color: green;
+    font-size: 0.9em;
+    margin-top: 1em;
+}
+
+.form{
+    border: 2px solid var(--banner_bg);
+    border-radius: 30px;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text_title);
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+.form form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form input{
+    margin-top: 1em;
+}
+
+.form button{
+    margin-top: 1em;
+    width: 100%;
+    background: var(--banner_bg);
+    padding: 10px;
+    border-radius: 30px;
+    font-size: 30px;
+}
