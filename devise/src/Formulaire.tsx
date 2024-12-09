@@ -29,7 +29,7 @@ const Formulaire: React.FC = () => {
         }
 
         const formData = new FormData();
-        formData.append('file', file);
+        formData.append('csvFile', file);
 
         try {
             const response = await fetch('http://localhost:8000/requete.php/upload_csv', {
