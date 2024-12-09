@@ -32,7 +32,7 @@ const Formulaire: React.FC = () => {
         formData.append('file', file);
 
         try {
-            const response = await fetch('http://localhost:8000/upload', {
+            const response = await fetch('http://localhost:8000/requete.php/upload_csv', {
                 method: 'POST',
                 body: formData,
             });
