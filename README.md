@@ -5,6 +5,13 @@
 ### Sven TUAL
 ### Antoine NOEL
 
+# Mise en place rapide
+
+Afin de pouvoir utiliser le programme, il est requis d'éxecuter ces deux commandes : 
+
+-Lancement du serveur de développement :
+
+
 Ce fichier a pour but d'expliquer les choix techniques de ce projet.
 
 ### Modèle de données 
