@@ -223,3 +223,19 @@
         color: #D76C82;
     }
 }
+
+.success-link{
+    background: var(--banner_bg);
+    padding: 0.3em;
+    border-radius: 30px;
+    text-decoration: none;
+    color: var(--text_home);
+    margin-top: 1em;
+    border: #7ED4AD solid 2px;
+    transition: ease-in-out 0.2s;
+  }
+  .success-link:hover{
+    background: var(--text_home);
+    color: var(--text_title);
+  
+  }

@@ -7,6 +7,7 @@ const Formulaire: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [successMessage, setSuccessMessage] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = event.target.files?.[0];
@@ -28,6 +29,10 @@ const Formulaire: React.FC = () => {
             return;
         }
 
+        setLoading(true); // Activer le loader
+        setErrorMessage(''); // Réinitialiser les erreurs
+        setSuccessMessage(''); // Réinitialiser les messages de succès
+
         const formData = new FormData();
         formData.append('csvFile', file);
 
@@ -45,6 +50,8 @@ const Formulaire: React.FC = () => {
             }
         } catch (error) {
             setErrorMessage('Une erreur est survenue lors de la requête.');
+        } finally {
+            setLoading(false); // Désactiver le loader
         }
     };
 
@@ -60,9 +67,24 @@ const Formulaire: React.FC = () => {
                         accept=".csv"
                         onChange={handleFileChange}
                     />
-                    {errorMessage && <p className="error">{errorMessage}</p>}
-                    {successMessage && <p className="success">{successMessage}</p>}
-                    <button type="submit">Envoyer</button>
+                    {loading && <img className="loading" src="loader.gif" alt='Chargement...'></img>}
+                    {errorMessage && (
+                        <p className="error">
+                            {errorMessage}
+                        </p>
+                    )}
+                                {successMessage ? (
+                        <>
+                            <p className="success">{successMessage}</p>
+                            <a className="success-link" href="/exchange-man">
+                                Retour au graphique
+                            </a>
+                        </>
+                    ) : (
+                        <button type="submit" disabled={loading}>
+                            {loading ? 'En cours...' : 'Envoyer'}
+                        </button>
+                    )}
                 </form>
             </div>
             <Footer />
