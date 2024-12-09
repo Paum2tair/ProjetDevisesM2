@@ -15,6 +15,8 @@ Afin de pouvoir utiliser le programme, il est requis d'éxecuter ces deux comman
 **-Lancement du serveur PHP :**
 ```php -S localhost:8000```
 
+Le format de la base de données est présent dans le fichier devise.sql. ⚠️ Les données y ont été retirées.
+
 ## Choix techniques
 
 Ce fichier a pour but d'expliquer les choix techniques de ce projet.
